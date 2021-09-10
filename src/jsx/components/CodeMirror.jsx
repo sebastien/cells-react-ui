@@ -23,12 +23,24 @@ const onUpdate = (topic) => {
     const value = doc.toString();
     const lines = [...doc.toJSON()];
     topic.pub({ value, lines });
-    deferred.push(200, () => API.parseCell(value));
+    deferred.push(
+      1000,
+      () => {
+        API.parse("python", value).then((_) => _.json()).then((_) => {
+          console.log("Parsed", _);
+        });
+        API.eval("python", value).then((_) => _.json()).then((_) => {
+          console.log("Eval", _);
+        });
+      },
+    );
   };
 };
 
 const CodeMirror = (props) => {
-  const initialValue = props.value;
+  const initialValue = props.value instanceof Array
+    ? props.value.join("\n")
+    : props.value;
   const [editor, setEditor] = useState(null);
   const [editorID, setEditorID] = useState(null);
   const ref = useRef();

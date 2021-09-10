@@ -1,0 +1,34 @@
+.Cell {
+}
+
+.Cell-wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+.Cell-wrapper:hover .Cell-control {
+  background-color: var(--color-grey-A25);
+  cursor: pointer;
+  .Button:hover,
+  .Button:active {
+    background-color: transparent;
+  }
+}
+.Cell-control {
+  padding-top: 2px;
+}
+
+.Cell-contents {
+  border-left: 1px solid var(--color-bd-dk);
+}
+
+.Cell-adder {
+  margin: 4px;
+  margin-left: 12px;
+  border-radius: 14px !important;
+}
+
+.CellControl {
+  display: flex;
+  flex-direction: column;
+}
